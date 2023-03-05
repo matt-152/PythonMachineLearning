@@ -1,5 +1,4 @@
 from Perceptron import *
-from csv import reader
 
 def test_attemptToFire():
     p = Perceptron(0.5, [0])
@@ -67,6 +66,7 @@ def test_train():
     assert attemptToFire(p, li2.inputs) == li2.label
     assert attemptToFire(p, li3.inputs) == li3.label
 
+def test_trainNeedingMultiplePasses()
     p = Perceptron(1, [0])
     li = LabeledInputs(1, [1])
     train(p, [li])
@@ -75,12 +75,4 @@ def test_train():
     train(p, [li, li2])
     assert attemptToFire(p, li.inputs) == li.label
     assert attemptToFire(p, li2.inputs) == li2.label
-
-if __name__ == '__main__':
-    print('Running...')
-    test_attemptToFire()
-    test_adjustWeightsAdjustsWeights()
-    test_adjustWeightsConverges()
-    test_train()
-    print('Tests complete')
 
