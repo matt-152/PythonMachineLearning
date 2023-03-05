@@ -1,0 +1,74 @@
+Specification for the Perceptron Object
+
+In the style of a series of Given-When-Then clauses
+
+- Should accept a list of input signals
+- Created with a list of weights
+- Factory to init with random/zero weights?
+- Has a function which turns input signals into an output 1/0
+- Weights are floats
+- Inputs are numeric (1/0? Floats? Ints?)
+- weights are multiplied by inputs and summed
+- At the beginning is a negative "threshold value"
+- if sum surpasses threshold, a "1" is fired
+- otherwise "-1" (does it need to be -1?)
+- Deduce based on learning equation
+- Input values depend on your dataset (ex. Iris has four floats between 0-8)
+- Separate correction function updates weights
+- Be nice if I could detect when learning is "done"
+- I.e. if when updating the weights, change is roughly zero
+- Can be hooked together (done by separate object)
+- Separate calc delta-weight function?
+- Perhaps just "learning done" function
+- That decision is outside perceptron, but an array of d-weights it a bit much
+- Just need one perceptron for Iris dataset
+- Just track avg correct/incorrect rate, outside of perceptron
+- Rolling average of accuracy
+- Output/serialize final weights
+- "Inputs" ought to reflect signal v. noise, as opposed to a mere scalar quality
+- Diagnostics spit out data after so many trials and/or lvl of accuracy obtained
+- Init accepts inital weights
+- classify accepts same num of input vals, outputs a one or zero
+- getWeights outputs array of current weight values
+- updateWeights takes arr of input vals and expected answer, returns nothing
+- Should the learn method be packaged with the classify method?
+- Yes, the former references the latter
+- classify and updateWeights thrown error when len(inputs) != len(weights)
+- should throw error if given non-numeric list of inputs or weights
+- learn should throw error if not given 0/1
+- needs to return -1 in order to adjust weights downward
+- forgot about the threshold value
+- Can I default this to 0.5?
+- Does it matter what I set the threshold? Seems like the weights will adjust to
+  it
+- Threshold value is necessary for testing
+
+Given a threshold value and an initial list of weights
+When a new Perceptron is created
+Then it should use those weights and that threshold
+
+Given a list of input values
+When the Perceptron is asked to classify something
+Then it should return a one or a negative one
+
+Given a list of inputs, and a target value different than what the Perceptron
+would return using those input values
+When the Perceptron is asked to update its weights
+Then it should at least some of its weight values
+
+Given a list of inputs, and a target value the same as what the Perceptron woudl
+return using those input values
+When the Perceptron is asked to update its weights
+Then none of the weights should change at all
+
+Give a list of inputs, and a target value different than what the Perceptron
+would return using those input values
+When the Perceptron is asked to update its weights over and over again
+Then eventually the Percepton will consistently start to return that target
+value in repsonse to those inputs
+
+Given a list of input values that is larger or smaller than the Perceptrons list
+of weights
+When the Percepton is asked to classify something
+Then it should throw an error
+
